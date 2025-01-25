@@ -1,0 +1,19 @@
+services:
+  nginx:
+    deploy:
+      labels:
+        - traefik.enable=true
+        - traefik.http.routers.dagobah.rule=Host(`dagobah-online.com`, `www.dagobah-online.com`)
+        - traefik.http.services.dagobah.loadbalancer.server.port=80
+        # Activate https
+        - traefik.http.routers.dagobah.tls=true
+        - traefik.http.routers.dagobah.tls.certresolver=myresolver
+        - traefik.http.routers.dagobah.middlewares=security@file
+    networks:
+      - gateway
+      - default
+
+networks:
+  gateway:
+    external: true
+    name: gateway
