@@ -3,7 +3,7 @@ services:
     deploy:
       labels:
         - traefik.enable=true
-        - traefik.http.routers.dagobah.rule=Host(`dagobah-online.com`, `www.dagobah-online.com`)
+        - traefik.http.routers.dagobah.rule=Host(`dagobah-online.com`) || Host(`www.dagobah-online.com`)
         - traefik.http.services.dagobah.loadbalancer.server.port=80
         # Activate https
         - traefik.http.routers.dagobah.tls=true
